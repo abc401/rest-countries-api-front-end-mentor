@@ -5,33 +5,41 @@
 	import DropDownOption from '$lib/DropDown/DropDownOption.svelte';
 </script>
 
-<main class="px-4 py-5">
-	<div class="grid grid-cols-[auto,_1fr] items-center rounded-md bg-neutral-100 px-4">
-		<label for="search-box" class="fa-solid fa-magnifying-glass p-4 opacity-30" />
-		<input
-			id="search-box"
-			class="py-3 ps-4 placeholder:text-xs placeholder:opacity-50 focus:outline-none"
-			type="text"
-			placeholder="Search for a country"
-		/>
+<main class="flex flex-col gap-8 px-4 py-5">
+	<div class="grid gap-8">
+		<label
+			for="search-box"
+			aria-label="Search Box"
+			class="grid grid-cols-[auto,minmax(0,_1fr)] items-center rounded-md bg-neutral-100 px-4 shadow-md sm:max-w-[30rem]"
+		>
+			<button class="z-10" aria-label="Submit Search">
+				<i class="fa-solid fa-magnifying-glass | p-4 opacity-30" />
+			</button>
+			<input
+				id="search-box"
+				class="py-3 ps-4 placeholder:text-xs placeholder:opacity-50"
+				type="text"
+				aria-label="Search Text"
+				placeholder="Search for a country"
+			/>
+		</label>
+		<div class="grid grid-cols-[minmax(0,_theme(width.52))]">
+			<DropDown class="">
+				<span slot="label">Filter by Region</span>
+				<svelte:fragment slot="items">
+					<DropDownOption value="Africa">Africa</DropDownOption>
+					<DropDownOption value="America">America</DropDownOption>
+					<DropDownOption value="Asia">Asia</DropDownOption>
+					<DropDownOption value="Europe">Europe</DropDownOption>
+					<DropDownOption value="Oceania">Oceania</DropDownOption>
+				</svelte:fragment>
+			</DropDown>
+		</div>
 	</div>
-	<div>
-		<DropDown>
-			<!-- <span slot="label">Hello World</span> -->
-			<DropDownOption value="Hello">Element 1</DropDownOption>
-			<DropDownOption value="World">Element 2</DropDownOption>
-		</DropDown>
-		<!-- <select class="p-4">
-			<option value="Africa">Africa</option>
-			<option value="America">America</option>
-			<option value="Asia">Asia</option>
-			<option value="Europe">Europe</option>
-			<option value="Oceania">Oceania</option>
-		</select> -->
-	</div>
-	<div>
+	<div class="grid grid-cols-[repeat(auto-fit,_minmax(14rem,_16.63rem))] justify-center gap-y-8">
 		{#each countries as country, idx (idx)}
-			<CountryCard {country} />
+			<CountryCard class="" {country} />
 		{/each}
 	</div>
 </main>
+<!-- 263 295.5 -->

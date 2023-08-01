@@ -28,14 +28,15 @@
 	$: isSelected = $selectedOption === optionKey;
 </script>
 
-<li class={clsx({ 'bg-black text-white': isSelected })}>
+<li class={clsx('flex items-center', { 'bg-black text-white': isSelected })}>
 	<button
+		class="w-full p-2 ps-6"
 		bind:this={container}
 		on:click={function () {
 			onOptionSelected(optionData);
 		}}
 	>
-		<div>
+		<div class="w-fit">
 			<slot />
 		</div>
 	</button>

@@ -27,6 +27,9 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ['Nunito Sans', defaultTheme.fontFamily.sans]
+			},
+			screens: {
+				xs: "17rem"
 			}
 		}
 	},
