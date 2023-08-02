@@ -29,7 +29,8 @@ export default {
 				sans: ['Nunito Sans', defaultTheme.fontFamily.sans]
 			},
 			screens: {
-				xs: "17rem"
+				xs: "17rem",
+				sm: "41.5rem"
 			}
 		}
 	},

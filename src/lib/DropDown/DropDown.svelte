@@ -65,7 +65,7 @@
 
 <div
 	bind:this={container}
-	class="relative block rounded-md bg-neutral-100 text-xs font-semibold shadow-md"
+	class="relative block rounded-md bg-neutral-100 text-xs font-semibold shadow-md sm:text-sm"
 >
 	<button
 		on:click={function () {
