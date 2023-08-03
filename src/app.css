@@ -9,17 +9,9 @@
 	h1 {
 		font-weight: theme('fontWeight.extrabold');
 	}
-	h2 {
-		font-size: theme('fontSize.base');
-		font-weight: theme('fontWeight.extrabold');
-	}
 	button {
 		display: inline-flex;
 		align-items: center;
 		gap: theme('space.2');
 	}
-}
-
-@layer components {
-
 }
