@@ -4,36 +4,57 @@
 	$: borders = data.borders;
 </script>
 
-<main class="p-7">
-	<button class="rounded-sm bg-neutral-100 px-6 py-1.5 shadow-md">
+<main
+	class="space-y-[clamp(4rem,_3vw_+_1.6rem,_5rem)] p-[clamp(1.75rem,_12vw_-_6rem,_5rem)] sm:text-base"
+>
+	<button
+		class="w-fit rounded-sm bg-neutral-100 px-6 py-1.5 shadow-md sm:rounded-lg sm:px-10 sm:py-2"
+	>
 		<i class="fa-solid fa-arrow-left" />Back
 	</button>
-	<img src={country.flags.svg} alt="" class="mb-12 mt-14" />
-	<div>
-		<h2 class="my-6 text-xl font-extrabold">{country.name}</h2>
-		<div class="flex flex-col gap-9">
-			<ul class="flex flex-col gap-3">
-				<li><span class="font-semibold">Native Name:</span> {country.nativeName}</li>
-				<li><span class="font-semibold">Population:</span> {country.population}</li>
-				<li><span class="font-semibold">Region:</span> {country.region}</li>
-				<li><span class="font-semibold">Sub Region:</span> {country.subregion}</li>
-				<li><span class="font-semibold">Capital</span> {country.capital}</li>
-			</ul>
-			<ul class="flex flex-col gap-3">
-				<li><span class="font-semibold">Top Level Domain:</span> {country.topLevelDomain}</li>
-				<li>
-					<span class="font-semibold">Currencies: </span>
-					{country.currencies?.map((currency) => currency.name).toString()}
-				</li>
-				<li>
-					<span class="font-semibold">Languages: </span>
-					{country.languages.map((language) => language.name).toString()}
-				</li>
-			</ul>
+	<div
+		class="grid gap-[clamp(2.5rem,_20vw_-_10.6rem,_8rem)] sm:grid-cols-[minmax(20rem,_1fr),_auto]"
+	>
+		<img src={country.flags.svg} alt="" class="w-full" />
+		<div class="grid min-w-[15rem] max-w-md grid-rows-[repeat(2,_auto),_1fr,_auto] gap-6">
+			<h2 class=" text-xl font-extrabold sm:text-4xl">{country.name}</h2>
+			<div class="flex flex-wrap justify-between gap-6">
+				<ul class=" space-y-2">
+					<li class="">
+						<span class="font-semibold">Native Name:</span>
+						{country.nativeName}
+					</li>
+					<li class="">
+						<span class="font-semibold">Population:</span>
+						{country.population}
+					</li>
+					<li class=""><span class="font-semibold">Region:</span> {country.region}</li>
+					<li class="">
+						<span class="font-semibold">Sub Region:</span>
+						{country.subregion}
+					</li>
+					<li class=""><span class="font-semibold">Capital</span> {country.capital}</li>
+				</ul>
 
-			<div>
+				<ul class="space-y-2">
+					<li class="">
+						<span class="font-semibold">Top Level Domain:</span>
+						{country.topLevelDomain}
+					</li>
+					<li class="">
+						<span class="font-semibold">Currencies: </span>
+						{country.currencies?.map((currency) => currency.name).toString()}
+					</li>
+					<li class="">
+						<span class="font-semibold">Languages: </span>
+						{country.languages.map((language) => language.name).toString()}
+					</li>
+				</ul>
+			</div>
+
+			<div class="row-end-[-1] grid gap-2 sm:grid-rows-[auto,auto]">
 				<h3 class="text-base font-semibold">Border Countries:</h3>
-				<ul class="my-4 flex flex-wrap gap-2 text-xs">
+				<ul class="flex flex-wrap gap-2 text-xs sm:text-sm">
 					{#each borders as border}
 						<a
 							data-sveltekit-preload-data="off"

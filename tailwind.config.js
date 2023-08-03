@@ -29,10 +29,12 @@ export default {
 				sans: ['Nunito Sans', defaultTheme.fontFamily.sans]
 			},
 			screens: {
-				xs: "17rem",
-				sm: "41.5rem"
+				xs: '17rem',
+				sm: '51.125rem'
 			}
 		}
 	},
 	plugins: []
 };
+
+// sm: "41.5rem"
