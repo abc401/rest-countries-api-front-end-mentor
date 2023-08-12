@@ -47,7 +47,6 @@
 			class={clsx(' px-2 py-4  sm:p-3', {
 				'bg-darkblue-700 text-neutral-100 dark:bg-neutral-100 dark:text-darkblue-900':
 					currentPage === firstLink + i,
-				// 'bg-black text-neutral-100': currentPage === firstLink + i,
 				'hover:outline hover:outline-2 hover:outline-darkblue-700 dark:hover:outline-neutral-100':
 					currentPage !== firstLink + i
 			})}

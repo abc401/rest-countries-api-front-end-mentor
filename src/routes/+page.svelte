@@ -17,7 +17,6 @@
 		return initialLoad;
 	}
 
-	console.log(countryStore.query);
 	let queryInputValue = countryStore.query;
 	$: {
 		if (!isInitialLoad()) {
@@ -34,12 +33,6 @@
 
 	$: pageNumber = $countryStore.currentPageNumber;
 
-	// $: totalPages = $countryStore.totalPages;
-	// $: currentPageNumber = $countryStore.currentPageNumber;
-	// $: pageEntries = $countryStore.pageEntries;
-
-	// $: console.log('Region Value: ', regionValue);
-
 	function updateURLParam(name: string, value: string | undefined) {
 		let urlParams = new URL(window.location.href).searchParams;
 		if (value == null || value === '') {
@@ -55,10 +48,6 @@
 	});
 
 	let queryInput: HTMLInputElement | undefined;
-
-	// console.log('Pages in Country Store: ', countryStore.totalPages());
-	// console.log('Raw results: ', countryStore.rawResults);
-	// console.log('Filtered Results', countryStore.filteredResults);
 
 	const nPageNavLinks = 4;
 </script>
@@ -98,7 +87,6 @@
 		<div class="grid grid-cols-[minmax(0,_theme(width.52))]">
 			<DropDown
 				on:select={async function (event) {
-					console.log('Selection Event: ', event.detail.value);
 					regionValue = event.detail.value;
 				}}
 			>

@@ -73,7 +73,6 @@ class CountryStore implements Readable<StoreData> {
 
 	private async updateRawResults() {
 		const apiURL = new URL(`${this.urlDomainName}/`);
-		// console.log('API Url: ', apiURL);
 
 		if (this._query != null) {
 			apiURL.searchParams.set(QUERY_PARAM_NAME, this._query);
@@ -82,7 +81,6 @@ class CountryStore implements Readable<StoreData> {
 		const res = await fetch(apiURL);
 		if (res.ok) {
 			const countries = await res.json();
-			// console.log('Api response: ', countries);
 			this.rawResults = countries;
 			this.filterResults();
 			return;
@@ -120,8 +118,6 @@ class CountryStore implements Readable<StoreData> {
 	}
 
 	set pageNumber(v: number) {
-		// console.log("Page Number Value: ", v)
-		// console.log("This.PageNumber: ", this._pageNumber)
 		if (this.pageNumber === v && this.initialized) {
 			return;
 		}
