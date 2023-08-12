@@ -3,7 +3,10 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 /** @type {import('tailwindcss').Config} */
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
+	darkMode: "class",
+	
 	theme: {
+
 		fontWeight: {
 			thin: 300,
 			semibold: 600,
@@ -36,5 +39,3 @@ export default {
 	},
 	plugins: []
 };
-
-// sm: "41.5rem"

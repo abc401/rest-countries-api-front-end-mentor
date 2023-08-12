@@ -9,7 +9,9 @@
 	}
 </script>
 
-<div class="sticky inset-0 top-0 z-[9999] flex justify-between bg-neutral-100 px-4 py-6 shadow-md">
+<div
+	class="sticky inset-0 top-0 z-[9999] flex justify-between bg-neutral-100 px-4 py-6 shadow-md dark:bg-darkblue-700"
+>
 	<h1 class="sm:text-2xl">Where in the world?</h1>
 	<button on:click={switchTheme}>
 		<i class="fa-regular" class:fa-moon={$theme === 'dark'} class:fa-sun={$theme === 'light'} />

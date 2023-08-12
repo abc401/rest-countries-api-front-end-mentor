@@ -2,13 +2,14 @@
 	export class DropDownContext {
 		constructor(
 			public onOptionSelected: (optionData: DropDownOptionData) => void,
+			public initialSelection: (optionData: DropDownOptionData) => void,
 			readonly selectedOption: Readable<Symbol | undefined>
 		) {}
 	}
 </script>
 
 <script lang="ts">
-	import { setContext } from 'svelte';
+	import { createEventDispatcher, setContext } from 'svelte';
 
 	import dropDownContextKey from './dropDownContextKey';
 	import type { DropDownOptionData } from './DropDownOption.svelte';
@@ -17,6 +18,7 @@
 
 	let className: string = '';
 	export { className as class };
+	export let name: string | undefined = undefined;
 
 	let state: 'close' | 'open' = 'close';
 	function nextState() {
@@ -31,11 +33,14 @@
 
 	let container: HTMLElement | null;
 	function onClickedOutside(event: MouseEvent) {
+		console.log('On clicked outside.');
 		if (container == null || !(event.target instanceof Node)) {
+			console.log('Container is Null');
 			return;
 		}
 
 		if (container.contains(event.target)) {
+			console.log('Container contains target.');
 			return;
 		}
 
@@ -47,30 +52,46 @@
 	let selectedOption = { subscribe };
 	let value: string | undefined = undefined;
 
+	const dispatch = createEventDispatcher();
+
 	function onOptionSelected(optionData: DropDownOptionData) {
 		if (optionData.key === $selectedOption) {
 			setSelectedOption(undefined);
 			value = undefined;
 			selectedOptionContainer = undefined;
-			return;
+		} else {
+			setSelectedOption(optionData.key);
+			value = optionData.value;
+			selectedOptionContainer = optionData.container;
 		}
+		dispatch('select', { value: value });
+	}
+
+	function initialSelection(optionData: DropDownOptionData) {
+		console.log('Initializing DropDown: ', optionData);
 		setSelectedOption(optionData.key);
 		value = optionData.value;
 		selectedOptionContainer = optionData.container;
 	}
 
-	let dropDownContext = new DropDownContext(onOptionSelected, selectedOption);
+	$: {
+		console.log('Drop Down Value: ', value);
+	}
+
+	let dropDownContext = new DropDownContext(onOptionSelected, initialSelection, selectedOption);
 	setContext(dropDownContextKey, dropDownContext);
 </script>
 
 <div
 	bind:this={container}
-	class="relative block rounded-md bg-neutral-100 text-xs font-semibold shadow-md sm:text-sm"
+	class="relative block rounded-md bg-neutral-100 text-xs font-semibold shadow-md dark:bg-darkblue-700 sm:text-sm"
 >
+	<input {name} {value} type="hidden" />
 	<button
 		on:click={function () {
 			nextState();
 		}}
+		type="button"
 		class={clsx('w-full', className)}
 		aria-expanded={state === 'open'}
 	>
@@ -93,7 +114,7 @@
 	</button>
 	<ul
 		class:hidden={state === 'close'}
-		class="absolute left-0 right-0 top-full mt-2 flex flex-col justify-items-center rounded-md bg-neutral-100 py-2 shadow-md"
+		class="absolute left-0 right-0 top-full mt-2 flex flex-col justify-items-center rounded-md bg-neutral-100 py-2 shadow-md dark:bg-darkblue-700"
 	>
 		<slot name="items" />
 	</ul>

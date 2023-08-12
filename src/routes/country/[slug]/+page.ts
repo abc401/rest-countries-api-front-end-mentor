@@ -1,18 +1,26 @@
-import data from '$lib/data.json';
+import { countryStore } from '$lib/stores/country.js';
+import type { Country } from '$lib/types/country';
+import { error } from '@sveltejs/kit';
 
-export function load({ params }) {
+export async function load({ params }) {
 	console.log(`Country load function: ${params.slug}`);
-	const slug = params.slug;
-	const filtered = data.filter((value) => {
-		return value.alpha3Code.toLowerCase() === slug.toLowerCase();
-	});
-	const country = filtered[0];
-	const borders = data.filter((value) => {
-		return country.borders?.includes(value.alpha3Code);
-	});
-	console.log(country, borders);
+
+	const country = await countryStore.getCountryByCode(params.slug);
+
+	if (country == null) {
+		throw error(404);
+	}
+
+	const borders: Country[] = [];
+	for (const border of country.borders) {
+		const country = await countryStore.getCountryByCode(border);
+		if (country != null) {
+			borders.push(country);
+		}
+	}
+
 	return {
-		country: country,
-		borders: borders
+		country,
+		borders
 	};
 }
